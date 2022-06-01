@@ -1,3 +1,4 @@
+import { sequence } from '@sveltejs/kit/hooks';
 import {
 	ConfigurePassportOAuth2,
 	OAuthHandleInput,
