@@ -25,13 +25,13 @@ ConfigurePassportOAuth2([
 export const handle = sequence(addUserToRequest);
 
 //add the user info to request (you can access this info in and endpoint using `request.locals`)
-async function addUserToRequest({ request, resolve }: OAuthHandleInput) {
-	const cookies = cookie.parse(request.headers.cookie || '');
+async function addUserToRequest({ event, resolve }: OAuthHandleInput) {
+	const cookies = cookie.parse(event.request.headers.cookie || '');
 	const cookieId = cookies[DefaultCookieName];
 	if (cookieId) {
-		request.locals = Database[cookieId]; //change this to retrieve from database
+		// event.request.locals = Database[cookieId]; //change this to retrieve from database
 	}
-	const response = await resolve(request);
+	const response = await resolve(event);
 	return response;
 }
 
