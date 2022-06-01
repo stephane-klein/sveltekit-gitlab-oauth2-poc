@@ -29,7 +29,7 @@
 		"svelte-check": "2.2.6",
 		"svelte-preprocess": "4.10.1",
 		"tslib": "2.3.1",
-		"typescript": "4.6.2"
+		"typescript": "4.6.2",
 		"passport-gitlab2": "5.0.0",
 		"sveltekit-passport-oauth2": "0.0.6"
 	}
