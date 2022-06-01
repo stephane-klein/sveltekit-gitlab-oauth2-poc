@@ -25,12 +25,13 @@
 	"dependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"cookie": "^0.5.0",
+		"passport-gitlab2": "5.0.0",
 		"svelte": "3.44.0",
 		"svelte-check": "2.2.6",
 		"svelte-preprocess": "4.10.1",
+		"sveltekit-passport-oauth2": "0.0.6",
 		"tslib": "2.3.1",
-		"typescript": "4.6.2",
-		"passport-gitlab2": "5.0.0",
-		"sveltekit-passport-oauth2": "0.0.6"
+		"typescript": "4.6.2"
 	}
 }

@@ -1,3 +1,4 @@
+import cookie from 'cookie';
 import { sequence } from '@sveltejs/kit/hooks';
 import {
 	ConfigurePassportOAuth2,
