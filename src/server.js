@@ -1,6 +1,6 @@
-const express = require('express')
-const passport = require('passport');
-const GitLabStrategy = require('passport-gitlab2');
+import express from 'express';
+import passport from 'passport';
+import GitLabStrategy from 'passport-gitlab2';
 
 const app = express()
 const port = 3000

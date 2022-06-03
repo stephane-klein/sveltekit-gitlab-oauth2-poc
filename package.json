@@ -4,6 +4,7 @@
   "scripts": {
     "start": "node src/server.js"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
