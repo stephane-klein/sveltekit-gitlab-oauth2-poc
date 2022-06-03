@@ -14,7 +14,10 @@ passport.use(
             baseURL: process.env.GITLAB_BASEURL
         },
         function(accessToken, refreshToken, profile, cb) {
-            return cb(err, user);
+            console.log('profile.id');
+            console.log(profile.id);
+            console.log(profile);
+            return cb();
         }
     )
 );
@@ -28,7 +31,7 @@ app.get(
     passport.authenticate(
         'gitlab',
         {
-            scope: ['api', 'email', 'profile']
+            scope: ['api email profile'] // See https://github.com/fh1ch/passport-gitlab2/pull/17
         }
     )
 );
