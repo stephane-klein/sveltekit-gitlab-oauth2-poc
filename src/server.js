@@ -10,7 +10,8 @@ passport.use(
         {
             clientID: process.env.GITLAB_CLIENT_ID,
             clientSecret: process.env.GITLAB_CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/gitlab/callback"
+            callbackURL: 'http://127.0.0.1:3000/auth/gitlab/callback',
+            baseURL: process.env.GITLAB_BASEURL
         },
         function(accessToken, refreshToken, profile, cb) {
             return cb(err, user);
@@ -21,6 +22,27 @@ passport.use(
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+app.get(
+    '/auth/gitlab',
+    passport.authenticate(
+        'gitlab',
+        {
+            scope: ['api', 'email', 'profile']
+        }
+    )
+);
+
+app.get(
+    '/auth/gitlab/callback',
+    passport.authenticate('gitlab', {
+        failureRedirect: '/login'
+    }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    }
+);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
