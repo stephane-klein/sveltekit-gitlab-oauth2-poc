@@ -17,6 +17,10 @@ passport.use(
             console.log('profile.id');
             console.log(profile.id);
             console.log(profile);
+            console.log('accessToken');
+            console.log(accessToken);
+            console.log('refreshToken');
+            console.log(refreshToken);
             return cb();
         }
     )
