@@ -1,9 +1,9 @@
 const express = require('express')
-const app = express()
-const port = 3000
-
 const passport = require('passport');
 const GitLabStrategy = require('passport-gitlab2');
+
+const app = express()
+const port = 3000
 
 passport.use(new GitLabStrategy({
     clientID: process.env.GITLAB_CLIENT_ID,
