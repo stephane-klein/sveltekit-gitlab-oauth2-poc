@@ -2,7 +2,7 @@
   "name": "poc-express-passport-gitlab2",
   "version": "0.1.0",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "nodemon src/server.js"
   },
   "type": "module",
   "keywords": [],
@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "4.18.1",
     "express-session": "1.17.3",
+    "nodemon": "^2.0.16",
     "passport": "0.6.0",
     "passport-gitlab2": "5.0.0"
   }
