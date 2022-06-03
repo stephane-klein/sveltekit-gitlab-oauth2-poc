@@ -1,9 +1,28 @@
 import express from 'express';
 import passport from 'passport';
 import GitLabStrategy from 'passport-gitlab2';
+import session from 'express-session';
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
+
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
+passport.serializeUser(function(user, cb) {
+    process.nextTick(function() {
+        cb(null, { id: user.id, username: user.username, accessToken: user.accessToken });
+    });
+});
+
+passport.deserializeUser(function(user, cb) {
+    process.nextTick(function() {
+        return cb(null, user);
+    });
+});
 
 passport.use(
     new GitLabStrategy(
@@ -14,20 +33,30 @@ passport.use(
             baseURL: process.env.GITLAB_BASEURL
         },
         function(accessToken, refreshToken, profile, cb) {
-            console.log('profile.id');
-            console.log(profile.id);
-            console.log(profile);
-            console.log('accessToken');
-            console.log(accessToken);
-            console.log('refreshToken');
-            console.log(refreshToken);
-            return cb();
+            return cb(
+                null,
+                {
+                    id: profile.id,
+                    username: profile.username,
+                    accessToken: accessToken
+                }
+            );
         }
     )
 );
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    console.log('req.session');
+    console.log(req.session);
+    if (req.session?.passport?.user?.id) {
+        res.send(`<ul>
+            <li>id: ${req.session.passport.user.id}</li>
+            <li>username: ${req.session.passport.user.username}</li>
+            <li>accessToken: ${req.session.passport.user.accessToken}</li>
+        </ul>`)
+    } else {
+        res.send('<a href="/auth/gitlab/">login</a>')
+    }
 })
 
 app.get(
@@ -47,6 +76,7 @@ app.get(
     }),
     function(req, res) {
         // Successful authentication, redirect home.
+        console.log('Successful authentication, redirect home');
         res.redirect('/');
     }
 );
