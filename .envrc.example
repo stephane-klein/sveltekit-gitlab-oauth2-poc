@@ -1,3 +1,7 @@
+# See on to create Application
+#
+# https://docs.gitlab.com/ee/integration/oauth_provider.html#user-owned-applications
+#
 export GITLAB_CLIENT_ID=
 export GITLAB_CLIENT_SECRET=
 export GITLAB_BASEURL=
