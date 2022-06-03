@@ -87,11 +87,14 @@ app.get('/', (req, res) => {
             <li>id: ${req.session.passport.user.id}</li>
             <li>username: ${req.session.passport.user.username}</li>
             <li>accessToken: ${req.session.passport.user.accessToken}</li>
-        </ul>`)
+        </ul>
+
+        <a href="/logout">Logout</a>
+        `)
     } else {
         res.send('<a href="/auth/gitlab/">login</a>')
     }
-})
+});
 
 app.get(
     '/auth/gitlab',
@@ -111,6 +114,12 @@ app.get(
         res.redirect('/');
     }
 );
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(function(err) {
+        res.redirect('/');
+    });
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
