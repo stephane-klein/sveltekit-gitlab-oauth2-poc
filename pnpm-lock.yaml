@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@sveltejs/adapter-auto': next
+  '@sveltejs/adapter-node': 1.0.0-next.78
   '@sveltejs/kit': next
   '@typescript-eslint/eslint-plugin': ^5.10.1
   '@typescript-eslint/parser': ^5.10.1
@@ -20,6 +21,7 @@ specifiers:
 
 dependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.50
+  '@sveltejs/adapter-node': 1.0.0-next.78
   '@sveltejs/kit': 1.0.0-next.348_svelte@3.44.0
   passport-gitlab2: 5.0.0
   svelte: 3.44.0
@@ -156,6 +158,12 @@ packages:
       '@iarna/toml': 2.2.5
       esbuild: 0.14.42
       set-cookie-parser: 2.4.8
+      tiny-glob: 0.2.9
+    dev: false
+
+  /@sveltejs/adapter-node/1.0.0-next.78:
+    resolution: {integrity: sha512-TXB5Ii0z/7o1B05p/YLsS4t+JUHFHWBzFv1U16TKvM3HMbMUJIx+AhpM2WJfDX8HtAyfd1m9OawGoUB+1ed24A==}
+    dependencies:
       tiny-glob: 0.2.9
     dev: false
 
