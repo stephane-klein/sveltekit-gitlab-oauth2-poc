@@ -1,9 +1,7 @@
 import url from 'node:url';
 import express from 'express';
-import passport from 'passport';
-import OAuth2Strategy from 'passport-oauth2';
-import { InternalOAuthError } from 'passport-oauth2';
 import session from 'express-session';
+import PassportOAuth2Middleware from './middleware.js';
 
 const app = express();
 const port = 3000;
@@ -14,20 +12,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
-passport.serializeUser(function(user, cb) {
-    process.nextTick(function() {
-        cb(null, { id: user.id, username: user.username, accessToken: user.accessToken });
-    });
-});
 
-passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-        return cb(null, user);
-    });
-});
-
-const gitlabOAuth2Strategy = new OAuth2Strategy(
-    {
+app.use(
+    '/',
+    PassportOAuth2Middleware({
         // configuration inspired from https://github.com/fh1ch/passport-gitlab2/blob/4238b67438c1f1a7050908556ac010bc319b734a/lib/strategy.js
         clientID: process.env.GITLAB_CLIENT_ID,
         clientSecret: process.env.GITLAB_CLIENT_SECRET,
@@ -36,50 +24,8 @@ const gitlabOAuth2Strategy = new OAuth2Strategy(
         scope: "api email profile",
         scopeSeparator: " ",
         callbackURL: 'http://127.0.0.1:3000/auth/gitlab/callback'
-    },
-    function(accessToken, refreshToken, profile, cb) {
-        return cb(
-            null,
-            {
-                id: profile.id,
-                username: profile.username,
-                accessToken: accessToken
-            }
-        );
-    }
+    })
 );
-
-gitlabOAuth2Strategy.userProfile = function (accesstoken, done) {
-    this._oauth2.get(
-        url.resolve(process.env.GITLAB_BASEURL, 'api/v4/user'),
-        accesstoken,
-        (err, body) => {
-            let json;
-            if (err) {
-                return done(new InternalOAuthError('Failed to fetch user profile', err));
-            }
-
-            try {
-                json = JSON.parse(body);
-            } catch (ex) {
-                return done(new Error('Failed to parse user profile'));
-            }
-
-            const profile = {
-                id: String(json.id),
-                username: json.username,
-                displayName: json.name,
-                emails: [{value: json.email}],
-                avatarUrl: json.avatar_url,
-                profileUrl: json.web_url
-            };
-
-            done(null, profile);
-        }
-    );
-};
-
-passport.use(gitlabOAuth2Strategy);
 
 app.get('/', (req, res) => {
     if (req.session?.passport?.user?.id) {
@@ -95,25 +41,6 @@ app.get('/', (req, res) => {
         res.send('<a href="/auth/gitlab/">login</a>')
     }
 });
-
-app.get(
-    '/auth/gitlab',
-    passport.authenticate(
-        'oauth2'
-    )
-);
-
-app.get(
-    '/auth/gitlab/callback',
-    passport.authenticate('oauth2', {
-        failureRedirect: '/login'
-    }),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        console.log('Successful authentication, redirect home');
-        res.redirect('/');
-    }
-);
 
 app.get('/logout', (req, res) => {
     req.session.destroy(function(err) {
