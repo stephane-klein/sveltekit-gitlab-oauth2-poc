@@ -13,13 +13,13 @@ Fill `.envrc` file with your GitLab application parameters
 Install packages:
 
 ```
-$ npm install
+$ pnpm install
 ```
 
 Launch application:
 
 ```
-$ npm run dev
+$ pnpm run dev
 ```
 
 Open your browser on http://127.0.0.1:3000
