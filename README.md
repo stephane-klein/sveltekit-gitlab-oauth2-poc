@@ -1,14 +1,8 @@
-# Svelte passport OAuth GitLab POC
+# Express-session + SvelteKit
 
-This project is work in progress, see issue: https://github.com/stephane-klein/poc-svelte-oauth-passport-gitlab/issues/1
+This project is work in progress, see this comment in issue: https://github.com/stephane-klein/poc-svelte-oauth-passport-gitlab/issues/1#issuecomment-1148203958
 
 ## Getting started
-
-```
-$ cp .envrc.example .envrc
-```
-
-Fill `.envrc` file with your GitLab application parameters
 
 Install packages:
 

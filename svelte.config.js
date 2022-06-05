@@ -1,13 +1,12 @@
+import url from 'node:url';
 import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
+import session from 'express-session';
 
 const myPlugin = {
-  name: 'log-request-middleware',
+  name: 'middleware',
   configureServer(server) {
-    server.middlewares.use((req, res, next) => {
-      console.log(`Got request ${req.url}`);
-      next();
-    });
+    server.middlewares.use(session);
   }
 };
 
