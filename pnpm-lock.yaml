@@ -9,6 +9,7 @@ specifiers:
   eslint: ^8.12.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-svelte3: ^4.0.0
+  oauth: ^0.9.15
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.0
   svelte: 3.44.0
@@ -21,6 +22,7 @@ dependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.50
   '@sveltejs/adapter-node': 1.0.0-next.78
   '@sveltejs/kit': 1.0.0-next.350_svelte@3.44.0
+  oauth: 0.9.15
   svelte: 3.44.0
   svelte-check: 2.2.6_svelte@3.44.0
   svelte-preprocess: 4.10.1_q3ol75iupkwmmwpeuo2fwoe64u
@@ -1542,6 +1544,10 @@ packages:
   /number-is-nan/1.0.1:
     resolution: {integrity: sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /oauth/0.9.15:
+    resolution: {integrity: sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==}
     dev: false
 
   /object-assign/4.1.1:
