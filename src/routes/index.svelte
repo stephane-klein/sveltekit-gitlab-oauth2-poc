@@ -1,2 +1,17 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import { session } from '$app/stores';
+</script>
+
+<p>User infos:</p>
+
+<ul>
+    <li>username: {$session.username || '-'}</li>
+    <li>name: {$session.name || '-'}</li>
+</ul>
+
+<p>Pages:</p>
+<ul>
+    <li><a href="/login/">Login</a></li>
+    <li><a href="/logout/">Logout</a></li>
+</ul>
+

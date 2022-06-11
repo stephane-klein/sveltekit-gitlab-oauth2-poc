@@ -17,6 +17,13 @@ export async function get({ url }) {
         }
     );
     if (res.status == 200) {
-        console.log(await res.json());
+        resultData = await res.json();
+        return {
+            status: 302,
+            headers: {
+                'Set-Cookie': `myapp=${resultData.access_token}; Max-Age=7200; Path=/; HttpOnly; SameSite=None`,
+                location: '/'
+            }
+        }
     }
 };
